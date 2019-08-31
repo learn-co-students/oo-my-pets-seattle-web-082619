@@ -40,10 +40,61 @@ class Owner
   #iterate through @@all for all the cats 
   #push them into an array 
   #each sandwich 
+  def dogs
+    collection_of_dogs = []
+    Dog.all.each do |dog|
+      if dog.owner == self
+      collection_of_dogs << dog
+      end 
+    end 
+    return collection_of_dogs
+  end 
 
-  #Cat.all was able to get some but not all 
+#above pattern is important, it is a sandwich pattern 
+#that you will use often 
 
+  def buy_cat(name)
+    Cat.new(name,self)
+  end 
+#how does the method above know about its cats?
+# this method would create a new cat instance, then you could 
+#call owner.buy_cat("name") and it would produce the dogs name =) 
+#thats how ;)  - Im almost positive 
 
+  def buy_dog(name)
+    Dog.new(name,self)
+  end 
+ 
+
+  def walk_dogs
+    self.dogs.each do |dog|
+      dog.mood = "happy"
+    end 
+  end 
+    #remember that a lot of our code builds on ourself.
+    #we already have a method that created a collection of dogs. 
+    #walking all of his dogs.
+
+    def feed_cats
+      self.cats.each do |cat|
+        cat.mood = "happy"
+      end 
+    end 
+
+    def sell_pets 
+      self.dogs.each do |dog|
+      dog.mood = "nervous"
+      dog.owner = nil
+      end 
+      self.cats.each do |cat| 
+      cat.mood = "nervous"
+      cat.owner = nil 
+      end 
+    end 
+
+    def list_pets 
+      "I have #{self.dogs.count} dog(s), and #{self.cats.count} cat(s)."
+    end 
 
 
 end
